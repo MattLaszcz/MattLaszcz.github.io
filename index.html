@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Project Board</title>
+    <link rel="stylesheet" href="styles/app.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+  
+    <header id="main-header">
+      <h1>Stock Market Simulator</h1>
+    </header>
+
+    <div>
+    <section id="active-projects">
+      <header>
+        <h2>Available Stocks</h2>
+      </header>
+      <ul id = 'active'>
+        <li
+          id="p1"
+          data-extra-info="Got lifetime access, but would be nice to finish it soon!"
+          class="card"
+        >
+          <h2>GOOG</h2>
+          <p>$1500.00</p>
+          <button class="alt">More Info</button>
+          <button>Buy</button>
+        </li>
+        <li
+          id="p2"
+          data-extra-info="Not really a business topic but still important."
+          class="card"
+        >
+          <h2>NET</h2>
+          <p>$9.36</p>
+          <button class="alt">More Info</button>
+          <button>Buy</button>
+        </li>
+      </ul>
+    </section>
+  
+
+
+  
+    <section id="finished-projects">
+      <header>
+        <h2>Owned Stocks</h2>
+      </header>
+      <ul>
+        <li
+          id="p3"
+          data-extra-info="Super important conference! Fictional but still!"
+          class="card"
+        >
+          <h2>JNJ</h2>
+          <p>$45.00</p>
+          <button class="alt">QUANTITY</button>
+          <button data-action="activate">SELL</button>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+   
+
+  <!--
+    <div>
+      <button id = "addButton" class='add_Button'>ADD NEW</button>
+    </div> -->
+  </body>
+</html>
