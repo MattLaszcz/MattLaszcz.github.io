@@ -58,8 +58,19 @@
         >
           <h2>JNJ</h2>
           <p>$45.00</p>
+          <form action="/action_page.php">
+            <label for="cars">QUANTITY TO SELL</label>
+            <select id="cars" name="cars">
+              <option value="volvo">1</option>
+              <option value="saab">2</option>
+              <option value="fiat">3</option>
+              <option value="audi">4</option>
+            </select>
+            <button data-action="activate">SELL</button>
+          </form>
+          
           <button class="alt">QUANTITY</button>
-          <button data-action="activate">SELL</button>
+          
         </li>
       </ul>
     </section>
