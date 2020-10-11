@@ -1,332 +1,260 @@
+
+
 class DOMHelper {
-  constructor(type) {this.refresh();
-  
-  
-  
-  }
-  
-    static clearEventListeners(element) {
-      const clonedElement = element.cloneNode(true);
-      element.replaceWith(clonedElement);
-      return clonedElement;
-    }
-  
-  
-    //receives element ID and a New destination in the DOM and sends the card to that destination Via Append.
-    static moveElement(elementId, newDestinationSelector) {
-      const element = document.getElementById(elementId);
-      const destinationElement = document.querySelector(newDestinationSelector);
-      destinationElement.append(element);
-      
-    }
-  
-  refresh () {
-  //Testing for selecting the <body> tag
-  const body = document.querySelector('body');
-  console.log(body);
-  const bodyLiSelector = body.querySelectorAll("#active > li")
-  console.log(bodyLiSelector);
-  }
+  static clearEventListeners(element) {
+    const clonedElement = element.cloneNode(true);
+    element.replaceWith(clonedElement);
+    return clonedElement;
   }
 
-  class Tooltip {}
-  
-  class ProjectItem {
-    
-  
-    constructor(id, updateProjectListsFunction, type) {
-      this.id = id;
-      this.type = type;
-      this.updateProjectListsHandler = updateProjectListsFunction;
-      //this.connectMoreInfoButton();
-      this.connectSwitchButton(type);
-      this.createNewButton1();
-      this.connectCloneSwitchButton();
-      this.connectSwitchButtonTest();
+  static moveElement(elementId, newDestinationSelector) {
+    const element = document.getElementById(elementId);
+    const destinationElement = document.querySelector(newDestinationSelector);
+    destinationElement.append(element);
+  }
+}
+
+class Component {
+  constructor(hostElementId, insertBefore = false) {
+    if (hostElementId) {
+      this.hostElement = document.getElementById(hostElementId);
+    } else {
+      this.hostElement = document.body;
     }
+    this.insertBefore = insertBefore;
+  }
+
+  detach() {
+    if (this.element) {
+      this.element.remove();
+      // this.element.parentElement.removeChild(this.element);
+    }
+  }
+
+  attach() {
+    this.hostElement.insertAdjacentElement(
+      this.insertBefore ? 'afterbegin' : 'beforeend',
+      this.element
+    );
+  }
+}
+
+class Tooltip extends Component {
+  constructor(closeNotifierFunction) {
+    super();
+    this.closeNotifier = closeNotifierFunction;
+    this.create();
+  }
+
+  closeTooltip = () => {
+    this.detach();
+    this.closeNotifier();
+  };
+
+  create() {
+    const tooltipElement = document.createElement('div');
+    tooltipElement.className = 'card';
+    tooltipElement.textContent = 'DUMMY!';
+    tooltipElement.addEventListener('click', this.closeTooltip);
+    this.element = tooltipElement;
+  }
+}
+
+class ProjectItem {
+  hasActiveTooltip = false;
+
+  constructor(id, updateProjectListsFunction, type) {
+    this.id = id;
+    this.updateProjectListsHandler = updateProjectListsFunction;
+    this.connectMoreInfoButton();
+    this.connectSwitchButton(type);
+  }
+
+  showMoreInfoHandler() {
+    if (this.hasActiveTooltip) {
+      return;
+    }
+    const tooltip = new Tooltip(() => {
+      this.hasActiveTooltip = false;
+    });
+    tooltip.attach();
+    this.hasActiveTooltip = true;
+  }
+
+  connectMoreInfoButton() {
+    const projectItemElement = document.getElementById(this.id);
+    const moreInfoBtn = projectItemElement.querySelector(
+      'button:first-of-type'
+    );
+    moreInfoBtn.addEventListener('click', this.showMoreInfoHandler);
+  }
+
+  connectSwitchButton(type) {
+    const projectItemElement = document.getElementById(this.id);
+    let switchBtn = projectItemElement.querySelector('button:last-of-type');
+    switchBtn = DOMHelper.clearEventListeners(switchBtn);
+    switchBtn.textContent = type === 'active' ? 'Finish' : 'Activate';
+    switchBtn.addEventListener(
+      'click',
+      this.updateProjectListsHandler.bind(null, this.id)
+    );
+  }
+
+  update(updateProjectListsFn, type) {
+    this.updateProjectListsHandler = updateProjectListsFn;
+    this.connectSwitchButton(type);
+  }
+}
+
+class ProjectList {
+  projects = [];
+
+  constructor(type) {
+    this.type = type;
+    const prjItems = document.querySelectorAll(`#${type}-projects li`);
+    for (const prjItem of prjItems) {
+      this.projects.push(
+        new ProjectItem(prjItem.id, this.switchProject.bind(this), this.type)
+      );
+    }
+    console.log(this.projects);
+  }
+
+  setSwitchHandlerFunction(switchHandlerFunction) {
+    this.switchHandler = switchHandlerFunction;
+  }
+
+  addProject(project) {
+    this.projects.push(project);
+    DOMHelper.moveElement(project.id, `#${this.type}-projects ul`);
+    project.update(this.switchProject.bind(this), this.type);
+  }
+
+  switchProject(projectId) {
+    // const projectIndex = this.projects.findIndex(p => p.id === projectId);
+    // this.projects.splice(projectIndex, 1);
+    this.switchHandler(this.projects.find(p => p.id === projectId));
+    this.projects = this.projects.filter(p => p.id !== projectId);
+  }
+}
+
+
+
+class Stock {
+  stocks = [];
+
+  constructor(name,price,amountOwned) {
+    this.name = name;
+    this.price = price;
+    this.amountOwned = amountOwned;
+    //this.createStockCard();
+  }
+
+  /*createStockCard (name,price) {
+     const stockCardHTML = (`
+          <li>
+           <h2>${name}</h2>
+           <p>'Price:'${price}</p>
+           <button class="alt">More Info</button>
+           <button>SELL</button>
+          </li> `);     
+
+  }*/
+}
+
+class Stocks {
+  stocks = [{name: 'GOOG', price: 10, amountOwned: 10},
+  {name: 'GOOG', price: 10, amountOwned: 10},
+  {name: 'GOOG', price: 10, amountOwned: 10},
+  {name: 'GOOG', price: 10, amountOwned: 10},
+  {name: 'GOOG', price: 10, amountOwned: 10}];
+
+constructor () { 
+  this.render();
   
-    createNew () {
-      const newClnIds = [];
-      const newItem = document.getElementById('active').querySelector('li');
+}
+createElement () {
+        
+        const prodUl = document.getElementById('active');
+        const prodEl = document.createElement('li');
+        prodEl.innerHTML = 
+          `
+           <h2>Name</h2>
+           <p>'Price:'10'</p>
+           <p>Amount Owned: </p>
+           <button class="alt">More Info</button>
+           <button>SELL</button>`;
+
+           document.getElementById('active').appendChild(prodEl);
+          prodEl.classList.add('card');
+}
+
+render () {
+  this.stocks.map(stock =>(this.createElement()))
+}
+
+
+
+
+
+  
+  
+  //for (stocks of stock) {
+    //document.getElementById('active').appendChild(stockCard);
+    
+    
+    
+    
+      /*const newItem = document.getElementById('active').querySelector('li');
       const cln = newItem.cloneNode(true);
       cln.id = "p" + (document.querySelectorAll("#active > li").length + 1);
       let clnId = cln.id;
       document.getElementById('active').appendChild(cln);
       console.log(newItem);
       newClnIds.push(clnId);
-      console.log(newClnIds);
-          
-      //Selects the Finish Button in the New Cloned Element and adds event listener to move it to the finished projects column when clicked.
-  
-      const clnButton = cln.querySelector('button:last-of-type');
-      clnButton.addEventListener("click", function() {DOMHelper.moveElement(cln.id, "#finished-projects ul");
-            
-    
-    });        // sends to DOMHelper which receives an id and a location to move that element to with the given id 
+      console.log(newClnIds);*/
+
   }
+
+
+
+
+
+
   
-  connectCloneSwitchButton () {
-    const newItem = document.getElementById('active').querySelector('li');
-      const cln = newItem.cloneNode(true);
-      cln.id = "p" + (document.querySelectorAll("#active > li").length + 1);
-  
-  
-    
-    const projectItemElement = document.getElementById(cln.id);
-  
-    //ProjectList.projects.push(new ProjectItem(cln.id, this.switchProject.bind(this), this.type))
-  
-    let switchBtn = projectItemElement.querySelector('button:last-of-type');
-    const testBtn = projectItemElement.querySelector('button:last-of-type');
-    switchBtn = DOMHelper.clearEventListeners(switchBtn);
-  
-    
-    let type = testBtn.textContent;
-    console.log(testBtn.textContent);
-    testBtn.textContent = type === 'active' ? 'Finish' : 'Activate';
-    switchBtn.addEventListener(
-      'click', this.connectSwitchButton
-      //this.updateProjectListsHandler.bind(null, cln.id)
+class Time {
+  constructor() {
+    this.time();
+  }
+
+  time () {
+    const currentTime = new Date ( );
+    const currentHours = currentTime.getHours ( );
+    const currentMinutes = currentTime.getMinutes ( );
+    const currentSeconds = currentTime.getSeconds ( );
+    currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+    currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
+    let timeOfDay = ( currentHours < 12 ) ? "AM" : "PM";
+    currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
+    currentHours = ( currentHours == 0 ) ? 12 : currentHours;
+    let currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+  };
+
+
+};
+
+class App {
+  static init() {
+    const activeProjectsList = new ProjectList('active');
+    const finishedProjectsList = new ProjectList('finished');
+    new Stocks();
+    activeProjectsList.setSwitchHandlerFunction(
+      finishedProjectsList.addProject.bind(finishedProjectsList)
     );
-  
-  
-  
+    finishedProjectsList.setSwitchHandlerFunction(
+      activeProjectsList.addProject.bind(activeProjectsList)
+    );
   }
-  
-  
-  createNewButton1 () {
-  
-    const addNewButton = document.getElementById('addButton');
-      addNewButton.addEventListener( 'click', this.createNew);
-  }
-  
-    //connectMoreInfoButton() {}
-  
-  //This is the test function that I learned from Stack Overflow:
-  connectSwitchButtonTest () {
-    let e = this.type;
-    document.getElementById("task-list").addEventListener("click", function(e) {
-      const targetDataset = e.target.dataset;
-      if (!Object.keys(targetDataset).includes("finish")) {
-        return;
-      }
-    
-      const action = targetDataset["action"];
-      const targetId = e.target.parentNode.dataset["taskId"];
-      switch (action) {
-        case "more":
-          alert(`Show more information for #${targetId}`);
-          break;
-        case "finish":
-          alert(`Mark #${targetId} as finished`);
-          break;
-      }
-    
-    })
-    
-  }
-  
-  
-    //retreives the button of the given DOM element and adds an event listener to it that executes updateProjectListHandler
-    //recieves from: update () {}
-    //runs updateProjectListsHandler --> this.switchProject --> 
-    connectSwitchButton(type) {
-      const projectItemElement = document.getElementById(this.id);
-      let switchBtn = projectItemElement.querySelector('button:last-of-type');
-      switchBtn = DOMHelper.clearEventListeners(switchBtn);
-  
-      
-     
-      switchBtn.textContent = type === 'active' ? 'Finish' : 'Activate';
-      switchBtn.addEventListener(
-        'click', 
-        this.updateProjectListsHandler.bind(null, this.id)
-      );
-    }
-  
-    update(updateProjectListsFn, type) {
-      this.updateProjectListsHandler = updateProjectListsFn;
-      this.connectSwitchButton(type);
-    }
-  
-  
-  
-  }
-  
-  class ProjectList {
-    projects = [];
-  
-    constructor(type) {
-      //selects all of the li elements under the `#${type}-projects DOM element depending on the element input type 
-      //and creates a new ProjectItem for every li element it found. 
-      this.type = type;
-      const prjItems = document.querySelectorAll(`#${type}-projects li`);
-      for (const prjItem of prjItems) {
-        this.projects.push(
-          new ProjectItem(prjItem.id, this.switchProject.bind(this), this.type)
-        );
-  
-        console.log(prjItem.id);
-      }
-  
-      /*const newItems = document.querySelectorAll(`#active li`);
-      for (const newItem of newItems) {
-        this.projects.push(
-          new ProjectItem(newItem.id, this.switchProject.bind(this), this.type)
-        );
-      }*/
-     
-      //new DayOfWeek('Monday');
-      console.log(this.projects);
-    }
-  
-    setSwitchHandlerFunction(switchHandlerFunction) {
-      this.switchHandler = switchHandlerFunction;
-    }
-  
-  
-    //pushes project to the projects array. Project input is "new ProjectList('finished');"
-    addProject(project) {
-      this.projects.push(project);
-      DOMHelper.moveElement(project.id, `#${this.type}-projects ul`);
-      project.update(this.switchProject.bind(this), this.type);
-    }
-  
-    //finds every project id in projects with the id matching constant projectId
-    //filters out every dom object with id that does not equal the projectId input to the function
-    switchProject(projectId) {
-      // const projectIndex = this.projects.findIndex(p => p.id === projectId);
-      // this.projects.splice(projectIndex, 1);
-      this.switchHandler(this.projects.find(p => p.id === projectId));
-      this.projects = this.projects.filter(p => p.id !== projectId);
-      //console.log(p.id)
-    }
-  
-  
-    switchDayHandler() {
-      //
-      const selectDayOfWeek = document.getElementById('');
-      //const dayOfWeek = selectDayOfWeek.querySelector('li')
-      selectDayOfWeek.addEventListener(
-        'click',
-        this.updateDayInfoHandler()
-      );
-      console.log(selectDayOfWeek);
-    }
-  
-    updateDayInfoHandler () {
-      console.log('TEST TEST TEST');
-  
-    }
-  
-  }
-  
-  class DayOfWeek {
-  
-  constructor (type) {
-    this.type = type;
-      const prjItems = document.querySelectorAll(`#${type}-projects li`);
-      for (const prjItem of prjItems) {
-        this.projects.push(
-          new ProjectItem(prjItem.id, this.switchProject.bind(this), this.type)
-        );
-      }
-  
-  
-    //this.createNewButton();
-  }
-  
-    projects = [];
-  
-  
-  setSwitchHandlerFunction(switchHandlerFunction) {
-    this.switchHandler = switchHandlerFunction;
-  }
-  
-  
-  
-  
-  
-  /*
-        switch (day) {
-            case ( 'Monday' ):
-              //this.addNewListItemHandler();   
-                break;
-            case ( 'Tuesday' ):      
-              console.log('Tuesday');
-                break;
-            case ( 'Wednesday' ):
-              console.log('Wednesday');
-                break;
-            case ( 'Thursday' ):
-              console.log('Thursday');
-                break;
-            case ( 'Friday' ):
-                console.log('Friday');
-                break;
-            //default:
-              //  ingredient = null;
-        }
-       
-  */
-  
-  
-  
-  addNewListItemHandler() {
-       
-        const projectItem = document.getElementById('active');
-        //const projectItemLi = document.getElementById('active li');
-        //const projectClone = projectItemLi.cloneNode(true);
-        const newListItem = document.createElement('li');
-        
-        newListItem.innerHTML = `
-        
-              <h2>MONDAY ITEM</h2>
-              <p>Don't forget to pick up groceries today.</p>
-              <button class="alt">More Info</button>
-              <button>Finish</button>
-              `;
-  
-        newListItem.classList.add('card');
-        //newListItem.push(ProjectList.this.projects);
-  
-  
-        projectItem.appendChild(newListItem);
-        //projectItem.appendChild(projectClone);
-    }
-  
-    createNewButton() {
-      const newButton = document.getElementById('addButton');
-      newButton.addEventListener( 'click', this.addNewListItemHandler);
-    
-    }
-  
-  
-  
-  
-  
-  }
-  
-  
-  
-  
-  
-  
-  class App {
-  
-    static init() {
-      const activeProjectsList = new ProjectList('active');
-      const finishedProjectsList = new ProjectList('finished');
-      //App.activeProjectsList = activeProjectsList;
-      new DayOfWeek();
-      activeProjectsList.setSwitchHandlerFunction(
-        finishedProjectsList.addProject.bind(finishedProjectsList)
-      );
-      finishedProjectsList.setSwitchHandlerFunction(
-        activeProjectsList.addProject.bind(activeProjectsList)
-      );
-    }
-  }
-  
-  App.init();
-  
+}
+
+App.init();

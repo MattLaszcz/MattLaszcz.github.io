@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Project Board</title>
-    <link rel="stylesheet" href="styles/app.css" />
-    <script src="app.js" defer></script>
+    <title>FINAL</title>
+    <link rel="stylesheet" href="./assets/styles/app.css" />
+    <script src="./assets/scripts/app.js" defer></script>
   </head>
   <body>
   
@@ -26,7 +26,17 @@
           class="card"
         >
           <h2>GOOG</h2>
-          <p>$1500.00</p>
+          <p>PRICE: $1500.00</p>
+          <form action="/action_page.php">
+            <label for="cars">QUANTITY TO BUY</label>
+            <select id="cars" name="cars">
+              <option value="volvo">1</option>
+              <option value="saab">2</option>
+              <option value="fiat">3</option>
+              <option value="audi">4</option>
+            </select>
+            <button>SELL</button>
+          </form>
           <button class="alt">More Info</button>
           <button>Buy</button>
         </li>
@@ -36,7 +46,17 @@
           class="card"
         >
           <h2>NET</h2>
-          <p>$9.36</p>
+          <p>PRICE: $9.36</p>
+          <form action="/action_page.php">
+            <label for="cars">QUANTITY TO BUY</label>
+            <select id="cars" name="cars">
+              <option value="volvo">1</option>
+              <option value="saab">2</option>
+              <option value="fiat">3</option>
+              <option value="audi">4</option>
+            </select>
+            <button>SELL</button>
+          </form>
           <button class="alt">More Info</button>
           <button>Buy</button>
         </li>
@@ -57,7 +77,7 @@
           class="card"
         >
           <h2>JNJ</h2>
-          <p>$45.00</p>
+          <p>PRICE: $45.00</p>
           <form action="/action_page.php">
             <label for="cars">QUANTITY TO SELL</label>
             <select id="cars" name="cars">
@@ -66,10 +86,10 @@
               <option value="fiat">3</option>
               <option value="audi">4</option>
             </select>
-            <button data-action="activate">SELL</button>
+            <button>SELL</button>
           </form>
           
-          <button class="alt">QUANTITY</button>
+          <!--<button class="alt">QUANTITY</button> -->
           
         </li>
       </ul>
