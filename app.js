@@ -164,33 +164,50 @@ class Stock {
 
 class Stocks {
   stocks = [{name: 'GOOG', price: 10, amountOwned: 10},
-  {name: 'GOOG', price: 10, amountOwned: 10},
-  {name: 'GOOG', price: 10, amountOwned: 10},
-  {name: 'GOOG', price: 10, amountOwned: 10},
-  {name: 'GOOG', price: 10, amountOwned: 10}];
+  {name: 'GOOG', price: 10, amountOwned: 11},
+  {name: 'NET', price: 11, amountOwned: 12},
+  {name: 'JNJ', price: 12, amountOwned: 13},
+  {name: 'AC', price: 13, amountOwned: 14}];
 
 constructor () { 
   this.render();
   
 }
-createElement () {
+createElement (stock) {
         
         const prodUl = document.getElementById('active');
         const prodEl = document.createElement('li');
         prodEl.innerHTML = 
-          `
-           <h2>Name</h2>
-           <p>'Price:'10'</p>
-           <p>Amount Owned: </p>
+         `
+           <h2>${stock[2].name}</h2>
+           <p>'Price:${stock[0].price}</p>
+           <p>Amount Owned:${stock[0].amountOwned} </p>
            <button class="alt">More Info</button>
-           <button>SELL</button>`;
+           <button>BUY</button>`;
+
+          /* `
+           <h2>${stockName}</h2>
+           <p>'Price:${stockPrice}</p>
+           <p>Amount Owned:${stockAmountOwned} </p>
+           <button class="alt">More Info</button>
+           <button>BUY</button>`;*/
 
            document.getElementById('active').appendChild(prodEl);
           prodEl.classList.add('card');
 }
 
 render () {
-  this.stocks.map(stock =>(this.createElement()))
+
+  /*let i;
+  for (i = 0, i <= length.stocks, i++)
+        let stockName  = this.stocks[i].name;
+        let stockPrice  = this.stocks[i].price;
+        let stockAmountOwned  = this.stocks[i].amountOwned;
+        createElement(stockName,stockPrice,stockAmountOwned)
+  }*/
+
+
+  this.stocks.map(stock =>(this.createElement(this.stocks)))
 }
 
 
