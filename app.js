@@ -92,8 +92,9 @@ class ProjectItem {
   connectSwitchButton(type) {
     const projectItemElement = document.getElementById(this.id);
     let switchBtn = projectItemElement.querySelector('button:last-of-type');
+    console.log(switchBtn);
     switchBtn = DOMHelper.clearEventListeners(switchBtn);
-    switchBtn.textContent = type === 'active' ? 'Finish' : 'Activate';
+    switchBtn.textContent = type === 'BUY' ? 'Finish' : 'Activate';
     switchBtn.addEventListener(
       'click',
       this.updateProjectListsHandler.bind(null, this.id)
@@ -148,6 +149,7 @@ class Stock {
     this.price = price;
     this.amountOwned = amountOwned;
     //this.createStockCard();
+    
   }
 
   /*createStockCard (name,price) {
@@ -163,14 +165,33 @@ class Stock {
 }
 
 class Stocks {
-  stocks = [{name: 'GOOG', price: 10, amountOwned: 10},
+  //Ex: const stocksExample = [{ name:"Mint Bean", pricePS: 3.50, owned: 10 }]
+  availableStocks = [{name: 'GOOG', price: 10, amountOwned: 10},
   {name: 'GOOG', price: 10, amountOwned: 11},
   {name: 'NET', price: 11, amountOwned: 12},
   {name: 'JNJ', price: 12, amountOwned: 13},
   {name: 'AC', price: 13, amountOwned: 14}];
 
-constructor () { 
-  this.render();
+  
+
+constructor (name, price, amountOwned) { 
+
+  this.name = name;
+  this.price = price;
+  this.amountOwned = amountOwned;
+
+  /*const availableStocks = [{name: 'GOOG', price: 10, amountOwned: 10},
+  {name: 'GOOG', price: 10, amountOwned: 11},
+  {name: 'NET', price: 11, amountOwned: 12},
+  {name: 'JNJ', price: 12, amountOwned: 13},
+  {name: 'AC', price: 13, amountOwned: 14}];*/
+
+  this.cash = {'availableFunds': 1000};
+
+  //this.render();
+  this.inputBuyHandler();
+  this.renderProducts();
+  //this.priceChangeHandler();
   
 }
 createElement (stock) {
@@ -179,11 +200,13 @@ createElement (stock) {
         const prodEl = document.createElement('li');
         prodEl.innerHTML = 
          `
-           <h2>${stock[2].name}</h2>
-           <p>'Price:${stock[0].price}</p>
-           <p>Amount Owned:${stock[0].amountOwned} </p>
-           <button class="alt">More Info</button>
-           <button>BUY</button>`;
+         
+           <h2>${this.name}</h2>
+           <p>Price:${this.availableStocks[0].price}</p>
+           <button>BUY</button>
+           <input placeholder="QUANTITY" name="name"/>
+           <p>Purchase Total:<p id = "values"></p></p>
+          `;
 
           /* `
            <h2>${stockName}</h2>
@@ -192,11 +215,63 @@ createElement (stock) {
            <button class="alt">More Info</button>
            <button>BUY</button>`;*/
 
-           document.getElementById('active').appendChild(prodEl);
+          
+           
+          document.getElementById('active').appendChild(prodEl);
           prodEl.classList.add('card');
+          const input = document.querySelector('input');
+          const log = document.getElementById('values');
+          
+
+          input.addEventListener('input', updateValue);
+
+          function updateValue(e) {
+              log.textContent = e.target.value;
+              const inputValue = e.target.value;
+              console.log(this.stocks.name);
+
+              }
+
+
+              
+
+          
 }
 
-render () {
+inputBuyHandler () {
+
+  document.addEventListener('click', function() {
+
+      //const li = document.querySelectorAll('li');
+      //const sellButton = li.getElementById('sell-button'); 
+      //console.log(sellButton);
+        //sellButton.addEventListener('click',console.log('SELL BUTTON WAS CLICKED'))
+
+
+
+        console.log('THIS IS A DOM TEST')
+  });
+}
+
+
+/*priceChangeHandler () {
+    
+  for (const prc of stocks) {pricePS = prc * (Math.floor(Math.random() * 3));
+    console.log(`${property}`);
+  }
+
+}*/
+
+renderProducts() {
+  this.availableStocks.map(stock =>(new AvailableStocks('test',5,5)))
+    
+  
+}
+
+
+  
+
+render (availableStocks) {
 
   /*let i;
   for (i = 0, i <= length.stocks, i++)
@@ -207,7 +282,7 @@ render () {
   }*/
 
 
-  this.stocks.map(stock =>(this.createElement(this.stocks)))
+  this.availableStocks.map(stock =>(this.createElement(availableStocks)))
 }
 
 
@@ -233,7 +308,43 @@ render () {
 
   }
 
+class AvailableStocks {
+  constructor(name, pricePS, amount) {
+    this.name = name;
+    this.pricePS = pricePS;
+    this.amount = amount;
+    this.newStock();
+  }
 
+
+  newStock() {
+
+    const prodUl = document.getElementById('active');
+        const prodEl = document.createElement('li');
+        prodEl.innerHTML = 
+         `
+         
+           <h2>${this.name}</h2>
+           <p>Price:${this.pricePS}</p>
+           <button>BUY</button>
+           <input placeholder="QUANTITY" name="name"/>
+           <p>Purchase Total: ${(this.amount)*(this.pricePS)}<p id = "values"></p></p>
+          `;
+
+          /* `
+           <h2>${stockName}</h2>
+           <p>'Price:${stockPrice}</p>
+           <p>Amount Owned:${stockAmountOwned} </p>
+           <button class="alt">More Info</button>
+           <button>BUY</button>`;*/
+
+          
+           
+          document.getElementById('active').appendChild(prodEl);
+          prodEl.classList.add('card');
+
+  }
+}
 
 
 
