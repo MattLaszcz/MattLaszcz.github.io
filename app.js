@@ -92,7 +92,6 @@ class ProjectItem {
   connectSwitchButton(type) {
     const projectItemElement = document.getElementById(this.id);
     let switchBtn = projectItemElement.querySelector('button:last-of-type');
-    console.log(switchBtn);
     switchBtn = DOMHelper.clearEventListeners(switchBtn);
     switchBtn.textContent = type === 'BUY' ? 'Finish' : 'Activate';
     switchBtn.addEventListener(
@@ -118,7 +117,7 @@ class ProjectList {
         new ProjectItem(prjItem.id, this.switchProject.bind(this), this.type)
       );
     }
-    console.log(this.projects);
+    //console.log(this.projects);
   }
 
   setSwitchHandlerFunction(switchHandlerFunction) {
@@ -151,50 +150,45 @@ class Stock {
     //this.createStockCard();
     
   }
-
-  /*createStockCard (name,price) {
-     const stockCardHTML = (`
-          <li>
-           <h2>${name}</h2>
-           <p>'Price:'${price}</p>
-           <button class="alt">More Info</button>
-           <button>SELL</button>
-          </li> `);     
-
-  }*/
 }
 
 class Stocks {
   //Ex: const stocksExample = [{ name:"Mint Bean", pricePS: 3.50, owned: 10 }]
-  availableStocks = [{name: 'GOOG', price: 10, amountOwned: 10},
-  {name: 'GOOG', price: 10, amountOwned: 11},
-  {name: 'NET', price: 11, amountOwned: 12},
-  {name: 'JNJ', price: 12, amountOwned: 13},
-  {name: 'AC', price: 13, amountOwned: 14}];
+  availableStocks = [{name: 'GOOG', price: 10, amountOwned: 10, qty:1},
+  {name: 'GOOGLE', price: 1500, amountOwned: 11, qty:1},
+  {name: 'NET', price: 11, amountOwned: 12, qty:1},
+  {name: 'JNJ', price: 12, amountOwned: 13, qty:1},
+  {name: 'AC', price: 13, amountOwned: 14, qty:1}];
 
-  
+  availableFunds = 1000;
 
-constructor (name, price, amountOwned) { 
+constructor (name, price, amountOwned, qty) { 
 
   this.name = name;
   this.price = price;
   this.amountOwned = amountOwned;
-
-  /*const availableStocks = [{name: 'GOOG', price: 10, amountOwned: 10},
-  {name: 'GOOG', price: 10, amountOwned: 11},
-  {name: 'NET', price: 11, amountOwned: 12},
-  {name: 'JNJ', price: 12, amountOwned: 13},
-  {name: 'AC', price: 13, amountOwned: 14}];*/
+  this.qty = qty;
 
   this.cash = {'availableFunds': 1000};
 
-  //this.render();
   this.inputBuyHandler();
   this.renderProducts();
-  //this.priceChangeHandler();
-  
+  this.refreshButtonHandler();
 }
-createElement (stock) {
+
+refreshButton() {
+
+}
+
+refreshButtonHandler () {
+
+  const refreshButton = document.getElementById('refresh');
+  //console.log(refreshButton);
+  refreshButton.addEventListener('click',function refresh(){
+        window.location.reload("Refresh")
+      });
+}
+/*createElement (stock) {
         
         const prodUl = document.getElementById('active');
         const prodEl = document.createElement('li');
@@ -208,15 +202,6 @@ createElement (stock) {
            <p>Purchase Total:<p id = "values"></p></p>
           `;
 
-          /* `
-           <h2>${stockName}</h2>
-           <p>'Price:${stockPrice}</p>
-           <p>Amount Owned:${stockAmountOwned} </p>
-           <button class="alt">More Info</button>
-           <button>BUY</button>`;*/
-
-          
-           
           document.getElementById('active').appendChild(prodEl);
           prodEl.classList.add('card');
           const input = document.querySelector('input');
@@ -230,13 +215,8 @@ createElement (stock) {
               const inputValue = e.target.value;
               console.log(this.stocks.name);
 
-              }
-
-
-              
-
-          
-}
+              }     
+}*/
 
 inputBuyHandler () {
 
@@ -249,73 +229,52 @@ inputBuyHandler () {
 
 
 
-        console.log('THIS IS A DOM TEST')
+        //console.log('THIS IS A DOM TEST')
   });
 }
 
 
-/*priceChangeHandler () {
-    
-  for (const prc of stocks) {pricePS = prc * (Math.floor(Math.random() * 3));
-    console.log(`${property}`);
-  }
 
-}*/
 
 renderProducts() {
-  this.availableStocks.map(stock =>(new AvailableStocks('test',5,5)))
-    
   
+  this.availableStocks.map(stock =>(new AvailableStocks(stock.name,stock.price,stock.amountOwned, stock.qty)))
 }
-
-
-  
 
 render (availableStocks) {
 
-  /*let i;
-  for (i = 0, i <= length.stocks, i++)
-        let stockName  = this.stocks[i].name;
-        let stockPrice  = this.stocks[i].price;
-        let stockAmountOwned  = this.stocks[i].amountOwned;
-        createElement(stockName,stockPrice,stockAmountOwned)
-  }*/
-
-
   this.availableStocks.map(stock =>(this.createElement(availableStocks)))
 }
-
-
-
-
-
-  
-  
-  //for (stocks of stock) {
-    //document.getElementById('active').appendChild(stockCard);
-    
-    
-    
-    
-      /*const newItem = document.getElementById('active').querySelector('li');
-      const cln = newItem.cloneNode(true);
-      cln.id = "p" + (document.querySelectorAll("#active > li").length + 1);
-      let clnId = cln.id;
-      document.getElementById('active').appendChild(cln);
-      console.log(newItem);
-      newClnIds.push(clnId);
-      console.log(newClnIds);*/
-
   }
 
 class AvailableStocks {
-  constructor(name, pricePS, amount) {
+
+  constructor(name, pricePS, amount, qty) {
     this.name = name;
     this.pricePS = pricePS;
     this.amount = amount;
+    this.qty = qty;
     this.newStock();
+    this.priceChangeHandler();
+    this.moveElement();
+   // this.buyButtonHandler();
+   
+   
   }
 
+
+  priceChangeHandler (price) {
+    //console.log(this.pricePS);
+    return (
+    price * (Math.floor(Math.random() * 2)))
+    
+
+  }
+
+  purchaseTotalHandler (amount, price) {
+
+    return (amount*price);
+  }
 
   newStock() {
 
@@ -325,51 +284,57 @@ class AvailableStocks {
          `
          
            <h2>${this.name}</h2>
-           <p>Price:${this.pricePS}</p>
-           <button>BUY</button>
+           <p>Price:${this.priceChangeHandler(this.pricePS)}</p> 
+           <button id = 'buy-button'>BUY</button>
            <input placeholder="QUANTITY" name="name"/>
-           <p>Purchase Total: ${(this.amount)*(this.pricePS)}<p id = "values"></p></p>
+           <p id = "values"></p>
+           <p id = 'purchase-total'></p>
           `;
-
-          /* `
-           <h2>${stockName}</h2>
-           <p>'Price:${stockPrice}</p>
-           <p>Amount Owned:${stockAmountOwned} </p>
-           <button class="alt">More Info</button>
-           <button>BUY</button>`;*/
-
-          
-           
+ 
           document.getElementById('active').appendChild(prodEl);
           prodEl.classList.add('card');
 
+          const input_1 = document.getElementsByTagName('name').value
+          const input = document.querySelector('input');
+          const log = document.getElementById('values');
+          log.textContent = input_1;
+          
+
+          input.addEventListener('input', updateValue);
+
+          function updateValue(e) {
+              //log.textContent = e.target.value;
+              const inputValue = e.target.value;
+              console.log(inputValue);
+              for (const val of inputValue) {
+                const sum = val * 5;
+                console.log(sum);
+                const purchaseTotal = document.getElementById('purchase-total');
+                purchaseTotal.textContent = 'TOTAL' + ' ' + '$' + sum;
+              }
+              
+          }
   }
-}
 
 
+  inputHandler() {
+    const input = document.querySelector('input');
+    input.addEventListener('input', );
+    
+  }
 
+  moveElement () {
+    
+    const buyButton = document.getElementById('buy-button')
+    buyButton.addEventListener('click', this.buyHandler());
+  }
 
+  buyHandler() {
+
+  }
   
-class Time {
-  constructor() {
-    this.time();
-  }
-
-  time () {
-    const currentTime = new Date ( );
-    const currentHours = currentTime.getHours ( );
-    const currentMinutes = currentTime.getMinutes ( );
-    const currentSeconds = currentTime.getSeconds ( );
-    currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
-    currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
-    let timeOfDay = ( currentHours < 12 ) ? "AM" : "PM";
-    currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
-    currentHours = ( currentHours == 0 ) ? 12 : currentHours;
-    let currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
-  };
-
-
-};
+}
+  
 
 class App {
   static init() {
