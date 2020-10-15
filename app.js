@@ -1,4 +1,3 @@
-
 class Stock {
   stocks = [];
 
@@ -43,7 +42,7 @@ refreshButton() {
 
 
 tickChangePrices() {
-  setInterval(function refresh(){window.location.reload("Refresh"), 15000);
+  setInterval(function refresh(){window.location.reload("Refresh")}, 15000);
 }
 
 refreshButtonHandler () {
@@ -67,20 +66,16 @@ refreshButtonHandler () {
            <input placeholder="QUANTITY" name="name"/>
            <p>Purchase Total:<p id = "values"></p></p>
           `;
-
           document.getElementById('active').appendChild(prodEl);
           prodEl.classList.add('card');
           const input = document.querySelector('input');
           const log = document.getElementById('values');
           
-
           input.addEventListener('input', updateValue);
-
           function updateValue(e) {
               log.textContent = e.target.value;
               const inputValue = e.target.value;
               console.log(this.stocks.name);
-
               }     
 }*/
 
@@ -178,8 +173,10 @@ class AvailableStocks {
               const prc = this.pricePS;
               const inputValue = e.target.value;
               console.log(inputValue);
+			 
+			
               for (const prc of inputValue) {
-                const sum = prc * 5;
+                const sum = prc * ((Math.random() * 0.2)) * (Math.random() < 0.5 ? -1 : 1) ;
                 console.log(sum);
                 const purchaseTotal = document.getElementById('purchase-total');
                 purchaseTotal.textContent = 'TOTAL' + ' ' + '$' + sum;
