@@ -33,10 +33,17 @@ constructor (name, price, amountOwned, qty) {
   this.inputBuyHandler();
   this.renderProducts();
   this.refreshButtonHandler();
+  this.tickChangePrices();
+
 }
 
 refreshButton() {
 
+}
+
+
+tickChangePrices() {
+  setInterval(function refresh(){window.location.reload("Refresh"), 15000);
 }
 
 refreshButtonHandler () {
@@ -104,7 +111,10 @@ render (availableStocks) {
 
   this.availableStocks.map(stock =>(this.createElement(availableStocks)))
 }
-  }
+
+}
+
+
 
 class AvailableStocks {
 
@@ -118,17 +128,19 @@ class AvailableStocks {
     this.moveElement();
    // this.buyButtonHandler();
    
-   
   }
-
 
   priceChangeHandler (price) {
     //console.log(this.pricePS);
     return (
-    price * (Math.floor(Math.random() * 2)))
+      //price + ( (random value of 0.2 of price) * (randomize if negative or positive) ).round to 2 decimal places
+      ( price + ( (price * (Math.random() * 0.2)) * (Math.random() < 0.5 ? -1 : 1) ) ).toFixed(2)
+    )
     
 
   }
+
+
 
   purchaseTotalHandler (amount, price) {
 
