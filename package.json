@@ -1,0 +1,15 @@
+{
+  "name": "js-trading-simulator-master",
+  "version": "1.0.0",
+  "description": "This is a stock trading game I wrote in JavaScript and jQuery.",
+  "main": "chart.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ajax": "0.0.4",
+    "chart.js": "^2.9.4"
+  }
+}

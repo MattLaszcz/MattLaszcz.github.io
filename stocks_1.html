@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Market Simulator</title>
+  <link href="stocks_1.css" rel="stylesheet">
+ 
+  
+  
+</head>
+<body style="background-image: url('./luke-chesser-tgrBcf7S_dY-unsplash.jpg'); z-index: 101;">
+  <h2>Your Total Cash Flow & Portfolio Value: <span id="netWorth">1000</span></h2>
+  <h2> Cash Flow: <span id="cashflow">1000</span></h2>
+  <div class="test">
+    
+  </div>
+
+  <div class="container">
+    <main>
+        <div class="main-left">
+          <ul id='stock-list'>
+
+          </ul>
+        </div>
+      <div class="main-right"></div>
+    </main>
+
+    <div style="z-index:100; position: fixed;" class="shape-blob"></div>
+    <div style="z-index:100; position: fixed;" class="shape-blob one"></div>
+    <div style="z-index:100; position: fixed;" class="shape-blob two"></div>
+
+  </div>
+
+  
+
+  
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="stocks.js"></script> 
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+  <script async type="text/javascript" src="graph.js" ></script>
+ 
+
+
+</body>
+</html>
