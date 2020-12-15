@@ -38,15 +38,15 @@ $(function() {
 		},
 		{
 			name : 'Pfizer'
-		, symbol : 'FB'
+		, symbol : 'FF'
 		, price : '500'
 		, shares : '0'
-	},
+	}
 		
 		];
 
 	//your cash flow
-	var cashflow = 1000;
+	var cashflow = 10000;
 
 	/*
 	- your portfolio value
@@ -92,11 +92,11 @@ $(function() {
 		
 	}
 
-
+	//dervies stock prices 
 	var changePrice = function(price) {
 
 		//generate random number -1 or 1
-		chance = Math.round(Math.random()) * 3 - 1;
+		chance = Math.round(Math.random()) * 2 - 1;
 
 		//adds chance/10 to price
 		price += chance/10; 
@@ -112,7 +112,7 @@ $(function() {
 		 var obj = companies[key];
 		 //console.log(obj)
 		 var test_symbol = obj['symbol'] + '-price';
-		 
+		 var sharesSymbol = obj['symbol'];
 		 for (var prop in obj) {
 			if (prop === 'symbol') {
 				//test_symbol = obj[prop]; 
@@ -131,10 +131,10 @@ $(function() {
                 <canvas id="myChart" ></canvas>
               </div>
 				 <div class="stock-data">
-					 <div class='shares-price'><p id="${test_symbol}">Price: ${obj['price']}</p><p id="shares-amount">Shares: ${obj['shares']}</p></div>
+					 <div class='shares-price'><p id="${test_symbol}">Price: ${obj['price']}</p><p id="shares-amount${sharesSymbol}">Shares: ${obj['shares']}</p></div>
 						 <div class='shares-percentage'>
 							 <button id = "${obj['symbol'] + 'buy'}" >buy</button>
-							 <button id='sell'>sell</button>
+							 <button id="${obj['symbol'] + 'sell'}">sell</button>
 						 </div>
 				 </div>
 		 </li>
@@ -238,11 +238,13 @@ $(function() {
 				}
 
 				p = portfolioValue();
+				q = p.toFixed(2);
 				t = cashflow + p; //cashflow + portfolio value
+				n = t.toFixed(2); //truncates the cashflow to 2 decimal places 
 
 				$('#cashflow').html(cashflow);//replace element with id 'cashflow' with the cashflow value
 				$('#portfolio').html(p);
-				$('#netWorth').html(t);
+				$('#netWorth').html(n);
 
 				//hide all buy buttons if cashflow is 0
 				if (cashflow === 0) {
@@ -326,8 +328,8 @@ $(document).on('click', "button", function(){
 		};
 
 
-		var sellButton = document.getElementById('sell')
-		sellButton.addEventListener('click', shareCounter());
+		//var sellButton = document.getElementById('sell')
+		//sellButton.addEventListener('click', shareCounter());
 	
 
 
@@ -356,7 +358,7 @@ $(document).on('click', "button", function(){
 	    		
 	    			if (prop === 'symbol') {
 	    				if (obj[prop] === symbol) { 
-	    					
+	    					test_symbol=obj[prop];
 	    					thisObj = key; 
 	    				}
 	    			}
@@ -393,10 +395,9 @@ $(document).on('click', "button", function(){
 	    						obj[prop] = sharesForThisStock; 
 
 	    						//and update the dom
-									$('#' + 'shares' + symbol).html(sharesForThisStock);
-									var sharesId = 'shares-amount';
-									console.log(sharesId);
-									document.getElementById('shares-amount').innerHTML(sharesForThisStock);
+									//$('#shares-amount'+test_symbol).html(sharesForThisStock);
+									var sharesId = 'shares-amount'+ test_symbol;
+									document.getElementById(sharesId).innerHTML=sharesForThisStock;
 									
 	    					}
 	    				}
@@ -426,7 +427,7 @@ $(document).on('click', "button", function(){
 	    		
 	    			if (prop === 'symbol') {
 	    				if (obj[prop] === symbol) { 
-
+								test_symbol=obj[prop];
 	    					thisObj = key; 
 	    				}
 	    			}
@@ -458,7 +459,9 @@ $(document).on('click', "button", function(){
 	    						obj[prop] = sharesForThisStock; 
 
 	    						//and update the dom
-	    						$('#' + 'shares' + symbol).html(sharesForThisStock);
+									//$('#' + 'shares' + symbol).html(sharesForThisStock);
+									var sharesId = 'shares-amount'+ test_symbol;
+									document.getElementById(sharesId).innerHTML=sharesForThisStock;
 	    					}
 	    				}
 	    			}

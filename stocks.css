@@ -1,0 +1,122 @@
+/* style for the table */
+table#myPortfolio {
+	border-width: 0 0 1px 1px;
+	border-collapse: collapse;
+	border-style: solid;	
+}
+	table, td{
+		border: none;
+
+	}
+
+	tr {
+		border: solid black;
+		
+
+	}
+
+	#myPortfolio td {
+		padding: 12px;
+	}
+
+/* styling the share price */
+.price {
+	/* Text Styles */
+	color: #006400;
+}
+
+#test-button {
+	border-radius: 15px;
+background: linear-gradient(145deg, #21de1f, #28ff24);
+box-shadow:  5px 5px 10px #1bb218, 
+             -5px -5px 10px #2fff2c;
+width: 50px;
+height: 50px;
+border: none;
+}
+
+
+
+.div-test {
+	
+  bottom: 25px;
+  right: 162px;
+  width: 50px;
+  height: 50px;
+  background: rgba(255,255,255,0.4);
+  backdrop-filter: blur(5px);
+}
+
+/* buy and sell buttons */
+a {
+    /* Button Styles */
+    display: block;
+    height: 25px;
+    width: 100px;
+    border: 2px solid #000000;
+     
+    /* Text Styles */
+    color: #FFFFFF;
+    text-align: center;
+    font: bold 12px;
+    line-height: 25px;
+
+    /* Link Styles */
+	  text-decoration: none;
+}
+
+main {
+  
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+ 
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: inherit;
+ 
+  width: 70%;
+	height: 500px;
+
+	border: solid slateblue;
+}
+
+.stocks-table {
+	filter: blur(0px);
+  backdrop-filter: blur(4px);
+	border-radius: 35px 0px 0px 35px;
+	
+	border: solid yellow;
+}
+
+
+/* mouse over any link (buy and sell buttons) */
+a:hover {
+	background: #000000;
+}  
+
+/* mouse over buy button */
+a.buy {
+	background: #009900;
+}
+
+/* mouse over sell button */
+a.sell{
+	background: #FF0000;
+}
+
+body {
+	background-image: url(http://bit.ly/2gPLxZ4); 
+ background-repeat: no-repeat;
+ background-attachment: fixed;
+ background-size: cover;
+}
+
+
+
+
+

@@ -43,6 +43,23 @@
   
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
   <script async type="text/javascript" src="graph.js" ></script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+            var symbol='goog';
+            var callback = function(data) {
+                    var price=data.query.results.span[0].content;
+                    alert('Stock Price: ' + price);
+                };
+
+            var url = 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/auto-complete?q=tesla&region=US';
+            // this is the lovely YQL query (html encoded) which lets us get the stock price:
+            // select * from html where url="http://finance.yahoo.com/q?s=goog" and xpath='//span[@id="yfs_l10_goog"]'
+            var data = "apidojo-yahoo-finance-v1.p.rapidapi.com" + symbol + "878ff1c9d9msh03c21eb3f35b56fp1a8382jsnf65a2eb3630f" + symbol + "%22%5D'&format=json";
+            $.getJSON(url, data, callback);
+    });
+</script>
  
 
 
