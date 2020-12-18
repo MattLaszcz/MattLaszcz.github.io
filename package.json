@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "ajax": "0.0.4",
-    "chart.js": "^2.9.4"
+    "chart.js": "^2.9.4",
+    "init": "^0.1.2"
   }
 }

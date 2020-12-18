@@ -1,5 +1,6 @@
 $(function() {
 
+	
 	//stock data
 		companies = [
 	  {
@@ -131,11 +132,12 @@ $(function() {
                 <canvas id="myChart" ></canvas>
               </div>
 				 <div class="stock-data">
-					 <div class='shares-price'><p id="${test_symbol}">Price: ${obj['price']}</p><p id="shares-amount${sharesSymbol}">Shares: ${obj['shares']}</p></div>
 						 <div class='shares-percentage'>
-							 <button id = "${obj['symbol'] + 'buy'}" >buy</button>
-							 <button id="${obj['symbol'] + 'sell'}">sell</button>
+							 <button class="button" id = "${obj['symbol'] + 'buy'}" >Buy</button>
+							 <button class="button" id="${obj['symbol'] + 'sell'}">Sell</button>
+							 <p class="shares-amount" id="shares-amount${sharesSymbol}">${obj['shares']}</p>
 						 </div>
+						 <div class='shares-price'><p id="${test_symbol}">Price: ${obj['price']}</p></div>
 				 </div>
 		 </li>
 

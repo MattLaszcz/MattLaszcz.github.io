@@ -12,6 +12,9 @@ var myChart = new Chart(ctx1, {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
             label: '',
+            fill: false,
+            showLine: true,
+            borderWidth: 0,
             data: [12, 10, 3, 5, 2, 3],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
