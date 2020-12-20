@@ -477,5 +477,20 @@ $(document).on('click', "button", function(){
 	   
 	});
 
+	getData();
+	async function getData() {
+		//const api_url = 'https://api.polygon.io/v2/aggs/ticker/GOOG/range/1/day/2020-06-01/2020-06-17?apiKey=I59UpHXxF6lJkmVjidzMVJELpi6DODRw';
+		const APPL_price = 'https://api.polygon.io/v1/last_quote/stocks/AAPL?apiKey=I59UpHXxF6lJkmVjidzMVJELpi6DODRw';
+		//const res = await fetch(api_url);
+		const applRes = await fetch(APPL_price);
+		//const data = await res.json();
+		const applData = await applRes.json();
+		//console.log(data.ticker);
+		//console.log(data.queryCount);
+
+		console.log(applData.askprice);
+		
+	};
+
 });
 
