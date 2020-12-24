@@ -6,66 +6,55 @@
   <title>Stock Market Simulator</title>
   <link href="stocks_1.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300&display=swap" rel="stylesheet">
- 
-  
-  
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300&display=swap" rel="stylesheet">
 </head>
  <body class="body" >
-  <div class="test">
-    
-  </div>
+      <div class="container">
+        <main>
+          <div class="main-left">
+              <ul id='stock-list'>
+              </ul>
+          </div>
 
-  <div class="container">
-    <main>
-      <div class="main-left">
-          <ul id='stock-list'>
-          </ul>
-      </div>
+          <div class="main-right">
+            <div class="account-data">
+              <h3>Your Total Cash Flow & Portfolio Value: <span id="netWorth">1000</span></h2>
+            </div>
+            <div class="account-cash-flow">
+              <h3> Cash Flow: <span id="cashflow">1000</span></h2>
+            </div>
+            <div class="account-cash-info">
+              <h3 id="userName"> Matthew Laszcz<span id="cashflow"></span></h3>
+            </div>
+            <div class='container'>
+              <a href='#' class='cta'>
+                <i data-feather="check" class='icon'></i>
+              </a>
+            </div>
+          </div>
+          
+        </main>
+        <a class="attribution" href="https://iexcloud.io">Data provided by IEX Cloud</a>
 
-      <div class="main-right">
-        <div class="account-data">
-          <h3>Your Total Cash Flow & Portfolio Value: <span id="netWorth">1000</span></h2>
-        </div>
-          <div class="account-cash-flow">
-            <h3> Cash Flow: <span id="cashflow">1000</span></h2>
-          </div>
-          <div class="account-cash-info">
-            <h3> Account Name<span id="cashflow"></span></h3>
-          </div>
-          <div class='container'>
-            <a href='#' class='cta'>
-              <i data-feather="check" class='icon'></i>
-            </a>
-          </div>
+        <!-- <div style="z-index:100; position: fixed;" class="shape-blob"></div>
+        <div style="z-index:100; position: fixed;" class="shape-blob one"></div>
+        <div style="z-index:100; position: fixed;" class="shape-blob two"></div> -->
         
-        <!-- References Dribbble / Twitter -->
-        <div class='cs-ref'>
-          <a class="cs-dribbble" href="https://dribbble.com/shots/9267275-Neumorphism-UI-Interactive-Button" target="_blank">
-            <div id='svgDribbble'></div>
-          </a>
-          <a class="cs-twitter" target="_blank" href="https://twitter.com/CosWiSe">
-            <div id='svgTwitter'></div>
-          </a>
-        </div>
       </div>
-    </main>
-
-    <div style="z-index:100; position: fixed;" class="shape-blob"></div>
-    <div style="z-index:100; position: fixed;" class="shape-blob one"></div>
-    <div style="z-index:100; position: fixed;" class="shape-blob two"></div>
-
-  </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    
     <script src="stocks.js"></script> 
     
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
     <script async type="text/javascript" src="graph.js" ></script>
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> -->
 
+
+    
+    
   </body>
 </html>

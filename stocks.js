@@ -1,60 +1,65 @@
-$(function() {
 
-	
+
+
+function stocks() {
+
+
 	//stock data
 		companies = [
 	  {
 	      name : 'Apple'
 	    , symbol : 'AAPL'
-	    , price : '100'
-	    , shares : '0'
+	    , price : '1'
+			, shares : '0'
+			, stockData: []
 	  },
-	  
+
 	  {
-	      name: 'Google'
-	    , symbol : 'GOOG'
-	    , price : '200'
-	    , shares : '0'
-	  },
-	  
+	       name: 'Google'
+	     , symbol : 'GOOG'
+	     , price : '0'
+			 , shares : '0'
+			 , stockData: []
+	   },
+
 	  {
 	      name : 'JP Morgan Chase'
 	    , symbol : 'JPM'
-	    , price : '300'
-	    , shares : '0'
+	    , price : '3'
+			, shares : '0'
+			, stockData: []
 	  },
-	  
+
 	  {
 	      name : 'Microsoft'
 	    , symbol : 'MSFT'
-	    , price : '400'
-	    , shares : '0'
+	    , price : '4'
+			, shares : '0'
+			, stockData: []
 	  },
-	  
+
 	  {
 	      name : 'Facebook'
 	    , symbol : 'FB'
-	    , price : '500'
-	    , shares : '0'
-		},
-		{
-			name : 'Pfizer'
-		, symbol : 'FF'
-		, price : '500'
-		, shares : '0'
-	}
-		
-		];
+	    , price : '5'
+			, shares : '0'
+			, stockData: []
+		}
+	];
 
 	//your cash flow
 	var cashflow = 10000;
 
 	/*
 	- your portfolio value
-	- calculates based on 
+	- calculates based on
 	current price of stocks
 	and shares owned
 	*/
+
+
+
+
 	var portfolioValue = function(){
 
 		var total = 0;
@@ -68,68 +73,60 @@ $(function() {
 			for (var prop in obj) {
 
 				/*
-				- grab the symbol value 
+				- grab the symbol value
 				- to use to make unique ids for tds
 				*/
 				if (prop === 'symbol') {
-					symbol = obj[prop]; 
+					symbol = obj[prop];
 				}
 
 				if (prop === 'price') {
 					//typecast string to float
 					var priceOfThisStock = parseFloat(obj[prop]);
+					//var priceOfThisStock = obj[prop];
+					//console.log(priceOfThisStock);
+
 				}
 
 				if (prop === 'shares') {
 					//typecast string to float
 					var sharesOwned = parseFloat(obj[prop]);
 					total += priceOfThisStock * sharesOwned;
+					//console.log(total);
 				}
 
 			}
 		}
 		//console.log(total);
-		return total; 
-		
+		return total;
+
 	}
 
-	//dervies stock prices 
-	var changePrice = function(price) {
 
-		//generate random number -1 or 1
-		chance = Math.round(Math.random()) * 2 - 1;
-
-		//adds chance/10 to price
-		price += chance/10; 
-
-		return price;
-	}
-
-	//build the table
 	for (var key in companies) {
 
 		var test_symbol = '';
 
 		 var obj = companies[key];
-		 //console.log(obj)
+		
 		 var test_symbol = obj['symbol'] + '-price';
 		 var sharesSymbol = obj['symbol'];
 		 for (var prop in obj) {
 			if (prop === 'symbol') {
-				//test_symbol = obj[prop]; 
+				//test_symbol = obj[prop];
 				//console.log(test_symbol);
 			}
 		}
-		
+
 		const prodUl = document.getElementById('stock-list');
 		const prodEl = document.createElement('div');
 		prodEl.className = 'stock-card';
-    prodEl.innerHTML = 
+    prodEl.innerHTML =
        `
 		 <li class="stocks">
 			 <h3 class='stock-symbol'>${obj['symbol']}</h3>
-			 <div class="stock-chart" id='stock-chart'>
-                <canvas id="myChart" ></canvas>
+			 				<div class="stock-chart" id='stock-chart-${obj['symbol']}'>
+                <canvas id="myChart-${obj['symbol']}" ></canvas>
               </div>
 				 <div class="stock-data">
 						 <div class='shares-percentage'>
@@ -137,10 +134,10 @@ $(function() {
 							 <button class="button" id="${obj['symbol'] + 'sell'}">Sell</button>
 							 <p class="shares-amount" id="shares-amount${sharesSymbol}">${obj['shares']}</p>
 						 </div>
-						 <div class='shares-price'><p id="${test_symbol}">Price: ${obj['price']}</p></div>
+						 <div class='shares-price'><p class="price-value" id="${test_symbol}"></p></div>
+						 <a href="https://iexcloud.io" class="attribution">IEX Cloud</a>
 				 </div>
 		 </li>
-
 	 `;
 
 	 document.getElementById('stock-list').appendChild(prodEl);
@@ -153,11 +150,11 @@ $(function() {
 	   for (var prop in obj) {
 
 			/*
-			- grab the symbol value 
+			- grab the symbol value
 			- to use to make unique ids for tds
 			*/
 			if (prop === 'symbol') {
-				symbol = obj[prop]; 
+				symbol = obj[prop];
 			}
 
 			if (prop === 'shares') {
@@ -177,37 +174,28 @@ $(function() {
 		*/
 		for (var key in companies) {
 			var obj = companies[key];
-			//console.log('obj'+obj);
 
 			var symbol = '';
 			var stockId = obj['symbol'] + '-price';
 			//console.log('stock Id=' + stockId);
 			for (var prop in obj) {
-				//console.log("prop"+prop);
 				/*
-				- grab the symbol value 
+				- grab the symbol value
 				- to use to make unique ids for tds
 				*/
 				if (prop === 'symbol') {
-					symbol = obj[prop]; 
-					//console.log('symbol'+symbol);
+					symbol = obj[prop];
 				}
 
-				if (prop === 'price') {
-					var priceOfThisStock = parseFloat(obj[prop]);
-					obj[prop] = changePrice(priceOfThisStock); 
-					//console.log('rounded price=' + priceOfThisStock);
 
-					var roundedPrice = (obj[prop]).toFixed(2);
+				//UPDATES THE PRICE OF THE STOCK
+				 if (prop === 'price') {
+				
 
-					 //var queryTest = document.getElementsByTagName("body");
-					 var getElementTest = document.getElementById(stockId).innerHTML = roundedPrice;
-					 //console.log('get element test=' + getElementTest);
-
-				}
+			 }
 			}
 		}
-    
+
 	}, 1000 /* every second */ );
 
 
@@ -217,13 +205,13 @@ $(function() {
 		/*
 			- run cash flow, portfolio value, total worth functions
 			  and then put them in the dom
-			- decide whether buy/sell buttons should appear 
+			- decide whether buy/sell buttons should appear
 			  and then put them or remove them from the dom
 		*/
 		for (var key in companies) {
 			var obj = companies[key];
 
-			//initialize 
+			//initialize
 			var symbol = '';
 			var price = 0;
 			var p = 0;
@@ -232,17 +220,17 @@ $(function() {
 			for (var prop in obj) {
 
 				/*
-				- grab the symbol value 
+				- grab the symbol value
 				- to use to make unique ids for tds
 				*/
 				if (prop === 'symbol') {
-					symbol = obj[prop]; 
+					symbol = obj[prop];
 				}
 
 				p = portfolioValue();
 				q = p.toFixed(2);
 				t = cashflow + p; //cashflow + portfolio value
-				n = t.toFixed(2); //truncates the cashflow to 2 decimal places 
+				n = t.toFixed(2); //truncates the cashflow to 2 decimal places
 
 				$('#cashflow').html(cashflow);//replace element with id 'cashflow' with the cashflow value
 				$('#portfolio').html(p);
@@ -250,11 +238,11 @@ $(function() {
 
 				//hide all buy buttons if cashflow is 0
 				if (cashflow === 0) {
-					$('button').each(function() { //INSTERT 'button' into the ' ' 
+					$('button').each(function() { //INSTERT 'button' into the ' '
 						//grab the id of this link and typecast it to a string
 							var id = String($(this).attr('id'));
-							
-  
+
+
   						//if it contains buy hide it
   						if (id.indexOf('buy') > 0) {
   							$(this).hide();
@@ -265,7 +253,7 @@ $(function() {
 				//hide buy button if cashflow can't buy a share
 				//show buy button if cashflow can buy a share
 				if (prop === 'price') {
-					price = parseFloat(obj[prop]); 
+					price = parseFloat(obj[prop]);
 					if (cashflow < price) {
 						$('#' + symbol + 'Buy').hide();
 					}else {
@@ -278,7 +266,7 @@ $(function() {
 				//show sell button if share isn't owned
 				if (prop === 'shares') {
 					var sharesOwned = parseFloat(obj[prop]);
-				
+
 					if (sharesOwned > 0) {
 						$('#' + symbol + 'Sell').show();
 					}else {
@@ -287,35 +275,32 @@ $(function() {
 				}
 			}
 		}
-	   
+
 	}, 1000 /* every 1000 mili seconds */ );
-	
+
 
 	//happens live
-$(document).on('click', "button", function(){	
+$(document).on('click', "button", function(){
 
 
 		for (var prop in obj) {
 
 			/*
-			- grab the symbol value 
+			- grab the symbol value
 			- to use to make unique ids for tds
 			*/
 			if (prop === 'symbol') {
-				symbol = obj[prop]; 
+				symbol = obj[prop];
 			}
 
 			if (prop === 'price') {
 				var priceOfThisStock = parseFloat(obj[prop]);
-				obj[prop] = changePrice(priceOfThisStock); 
 				
 
+
 				var roundedPrice = (obj[prop]).toFixed(2);
-				//console.log(prop);
-				//console.log(symbol);
-				//$('#'+prop+symbol).html("<span class='price'>" + roundedPrice + "</span>");
 				var stockId = symbol + '-' + 'price';
-				
+
 				 stockId = JSON.stringify(stockId);
 				 console.log(stockId);
 
@@ -324,47 +309,36 @@ $(document).on('click', "button", function(){
 			}
 		}
 
-		function shareCounter (n) {
-			var shares = document.getElementById('shares-amount'); 
-
-		};
-
-
-		//var sellButton = document.getElementById('sell')
-		//sellButton.addEventListener('click', shareCounter());
-	
-
-
-
 	    //grab the id of this link and typecast it to a string
 			var id = String($(this).attr('id'));
-			
+
 
 	    //if this is a buy button
 	    if (id.indexOf('buy') > 0) {
 	    	//extract the symbol of the stock this is for
-				symbol = id.substr(0, id.indexOf('buy')); 
-				
+				symbol = id.substr(0, id.indexOf('buy'));
 
-	    	//only do if cash flow is greater than share price 
-	    	//add a share 
+
+	    	//only do if cash flow is greater than share price
+	    	//add a share
 	    	//subtract share amount from cashflow
 
 	    	//initialize
-	    	var thisObj = 0; //specific object in companies 
+	    	var thisObj = 0; //specific object in companies
 
 	    	for (var key in companies) {
 	    		var obj = companies[key];
 
 	    		for (var prop in obj) {
-	    		
+
 	    			if (prop === 'symbol') {
-	    				if (obj[prop] === symbol) { 
+	    				if (obj[prop] === symbol) {
 	    					test_symbol=obj[prop];
-	    					thisObj = key; 
+	    					thisObj = key;
 	    				}
 	    			}
 
+						//Subtracts price of the stock purchased from the current cashflow.
 	    			if (prop === 'price') {
 	    				if (key === thisObj) {
 	    					var PriceForThisStock = parseFloat(obj[prop]);
@@ -372,16 +346,16 @@ $(document).on('click', "button", function(){
 	    					if ( cashflow > PriceForThisStock ) {
 	    						var subtractPrice = true;
 
-	    						//since you bought a share we should 
+	    						//since you bought a share we should
 	    						//subtract the price of the share
 	    						//from your cashflow
 	    						cashflow = cashflow - PriceForThisStock;
 
 	    					}
 	    				}
-	    				
+
 	    			}
-						
+
 						//update the amount of shares owned.
 	    			if (prop === 'shares') {
 	    				if (key === thisObj) {
@@ -392,15 +366,15 @@ $(document).on('click', "button", function(){
 
 	    						//add 1 to the shares owned for this stock
 	    						sharesForThisStock += 1;
-	    						
+
 	    						//and update the shares inside the companies array
-	    						obj[prop] = sharesForThisStock; 
+	    						obj[prop] = sharesForThisStock;
 
 	    						//and update the dom
 									//$('#shares-amount'+test_symbol).html(sharesForThisStock);
 									var sharesId = 'shares-amount'+ test_symbol;
 									document.getElementById(sharesId).innerHTML=sharesForThisStock;
-									
+
 	    					}
 	    				}
 	    			}
@@ -413,24 +387,24 @@ $(document).on('click', "button", function(){
 	    if (id.indexOf('sell') > 0) {
 
 	    	//extract the symbol of the stock this is for
-	    	symbol = id.substr(0, id.indexOf('sell')); 
+	    	symbol = id.substr(0, id.indexOf('sell'));
 
 		    //only do if share of this stock is owned
 		    //subtract a share
 		    //add share amount to cash flow
 
 	    	//initialize
-	    	var thisObj = 0; //specific object in companies 
+	    	var thisObj = 0; //specific object in companies
 
 	    	for (var key in companies) {
 	    		var obj = companies[key];
 
 	    		for (var prop in obj) {
-	    		
+
 	    			if (prop === 'symbol') {
-	    				if (obj[prop] === symbol) { 
+	    				if (obj[prop] === symbol) {
 								test_symbol=obj[prop];
-	    					thisObj = key; 
+	    					thisObj = key;
 	    				}
 	    			}
 
@@ -438,7 +412,7 @@ $(document).on('click', "button", function(){
 	    				if (key === thisObj) {
 	    					var PriceForThisStock = parseFloat(obj[prop]);
 	    				}
-	    				
+
 	    			}
 
 	    			if (prop === 'shares') {
@@ -449,16 +423,16 @@ $(document).on('click', "button", function(){
 	    					//if you own shares for this stock
 	    					if (sharesForThisStock) {
 
-	    						//since you sold a share we should 
+	    						//since you sold a share we should
 	    						//add the price of the share
 	    						//to your cashflow
 	    						cashflow = cashflow + PriceForThisStock;
 
 	    						//minus 1 to the shares owned for this stock
 	    						sharesForThisStock -= 1;
-	    						
+
 	    						//and update the shares inside the companies array
-	    						obj[prop] = sharesForThisStock; 
+	    						obj[prop] = sharesForThisStock;
 
 	    						//and update the dom
 									//$('#' + 'shares' + symbol).html(sharesForThisStock);
@@ -470,27 +444,21 @@ $(document).on('click', "button", function(){
 
 	    		}
 	    	}
-	    } 
-
+	    }
 	    //act like a button not a link
-	    return false;
-	   
+			return false;
 	});
+};
 
-	getData();
-	async function getData() {
-		//const api_url = 'https://api.polygon.io/v2/aggs/ticker/GOOG/range/1/day/2020-06-01/2020-06-17?apiKey=I59UpHXxF6lJkmVjidzMVJELpi6DODRw';
-		const APPL_price = 'https://api.polygon.io/v1/last_quote/stocks/AAPL?apiKey=I59UpHXxF6lJkmVjidzMVJELpi6DODRw';
-		//const res = await fetch(api_url);
-		const applRes = await fetch(APPL_price);
-		//const data = await res.json();
-		const applData = await applRes.json();
-		//console.log(data.ticker);
-		//console.log(data.queryCount);
+stocks();
 
-		console.log(applData.askprice);
-		
-	};
 
-});
+
+
+
+
+
+
+
+
 

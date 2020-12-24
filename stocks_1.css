@@ -1,6 +1,4 @@
-
-
- .test {
+.test {
   background: inherit;
   width: 250px;
   height: 350px;
@@ -8,7 +6,7 @@
   overflow: hidden;  
  }
 
- .test:before{
+.test:before{
   content: ‘’;
   width: 300px;
   height: 400px;
@@ -22,14 +20,10 @@
   filter: blur(10px);
  }
 
-
-
 main {
-  
   position: absolute;
   display: flex;
   flex-direction: row;
- 
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -37,36 +31,25 @@ main {
   margin: 0;
   padding: 0;
   background: inherit;
- 
   width: 70%;
   height: 500px;
-
- 
 }
 
 .main-left {
-  
   display: flex;
   background: #fff;
   width: 75%;
   height: 500px;
   background: rgba(115 115 115/ 30%);
-  /* filter: blur(0px); */
-  /* backdrop-filter: blur(10px);
-  border-radius: 35px 0px 0px 35px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgb(120 120 120 / 30%) 42%, rgb(51 51 51 / 30%) 100%); */
   justify-content: space-between;
   align-items: center;
   border: 0.2px solid #FFFFFF;
   flex-direction: column;
-
-  /* border: 1px solid rgb(122 122 122 / 30%); */
-
   background: rgba( 255, 255, 255, 0.40 );
-box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-backdrop-filter: blur( 10.0px );
--webkit-backdrop-filter: blur( 10.0px );
-border-radius: 10px 0px 0px 10px;
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 10.0px );
+  -webkit-backdrop-filter: blur( 10.0px );
+  border-radius: 10px 0px 0px 10px;
 }
 
 ul {
@@ -77,20 +60,14 @@ ul {
   direction: rtl;
 }
 
-/* .stock-card {
-  /* border: solid slateblue; 
-} */
-
 li {
   margin: 1rem 0;
   /* border: solid yellow; */
   align-items: center;
   justify-content: space-between;
- 
 }
 
 .stock-chart {
-  
   /* border: solid green; */
   display: flex;
   flex-direction: row;
@@ -100,59 +77,54 @@ li {
 }
 
 .shares-price {
-   /* border: solid orange;  */
-  display: flex;
+  /* border: solid orange;    */
+  display: inline;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
   justify-content: center;
-  font-family: 'Lato', sans-serif;
-  color: #FB7575;
- 
-}
-
-.shares-percentage {
-   /* border: solid blue;  */
-   display: flex;
-   flex-direction: row;
-   justify-content: space-evenly;
-   width: 200px;
-   align-items: center;
-} 
-
-.shares-amount {
-  font-family: 'Lato', sans-serif;
-  color: #FB7575;
- 
-}
-
-.stock-symbol {
-  /* border: solid purple; */
-  /* background-color: yellow; */
-  border-radius: 5px;
   font-family: 'Lato', sans-serif;
   color: #FB7575;
   
 }
 
-.cash-portfolio-value {
-  background: #D99696;
-mix-blend-mode: normal;
-box-shadow: inset -2px -2px 1px rgba(0, 0, 0, 0.08), inset 4px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 35px;
+.price-value {
+  display: inline;
 }
 
+.attribution {
+  margin-top: 0px;
+  /* border:solid green;  */
+  font-size: 8px;
+}
 
+.shares-percentage {
+  /* border: solid blue;  */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 200px;
+  align-items: center;
+} 
 
+.shares-amount {
+  font-family: 'Lato', sans-serif;
+  color: #FB7575;
+  font-size: 30px;
+}
 
-/*body {
-  background-image: url(http://bit.ly/2gPLxZ4); 
- background-repeat: no-repeat;
- background-attachment: fixed;
- background-size: cover;
-}*/
+.stock-symbol {
+  /* border: solid purple; */
+  border-radius: 5px;
+  font-family: 'Lato', sans-serif;
+  color: #FB7575;
+}
 
-
+.cash-portfolio-value {
+  background: #D99696;
+  mix-blend-mode: normal;
+  box-shadow: inset -2px -2px 1px rgba(0, 0, 0, 0.08), inset 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 35px;
+}
 
 ::-webkit-scrollbar {
   -webkit-appearance: none;
@@ -171,11 +143,9 @@ body {
 	margin: 0;
   padding: 0;
   background-color: #FEB5BB;
-  
 }
 
 .container {
-	/* background-image: url(/luke-chesser-tgrBcf7S_dY-unsplash.jpg);  */
 	min-height: 100vh;
 	display: flex;
 	flex-direction: row;
@@ -190,7 +160,7 @@ body {
 	height: 200px;
 	width: 200px;
 	border-radius: 30% 50% 20% 40%;
-  	animation: 
+  animation: 
 		transform 40s ease-in-out infinite both alternate,
 		movement_one 60s ease-in-out infinite both;
 	opacity:.15;
@@ -206,7 +176,6 @@ body {
 	top: -150px;
 	transform: rotate(-180deg);
   animation: transform 30s ease-in-out infinite both alternate, movement_two 60s ease-in-out infinite both;
-  
 }
 
 .shape-blob.two{
@@ -216,7 +185,6 @@ body {
 	top: -150px;
 	transform: rotate(-180deg);
   animation: transform 30s ease-in-out infinite both alternate, movement_two 60s ease-in-out infinite both;
-  
 }
 
 .account-cash-flow, .account-cash-info, .account-data {
@@ -261,14 +229,8 @@ body {
   background: #D2DEEF;
   border: 0.2px solid #FFFFFF;
   box-sizing: border-box;
-  /* filter: blur(0px);
-  backdrop-filter: blur(3px); */
-  /* Note: backdrop-filter has minimal browser support */
-  
   border-radius: 0px 10px 10px 0px;
-  
-  /*border: solid greenyellow;*/
-  }
+}
 
 .stocks {
   /* border: solid black; */
@@ -281,90 +243,84 @@ body {
   flex-direction: row;
   direction: ltr;
   border-radius: 35px;
-  
   background: #EAF0F8;
   mix-blend-mode: normal;
   border: 0.5px solid #FFFFFF;
   box-shadow: 0px -30px 60px rgba(167, 179, 190, 0.35), 0px 30px 60px rgba(167, 179, 190, 0.35);
-  
-  /* backdrop-filter: blur(0px); */
-  
-  }
-
-  .social-media{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-self: flex-end;
-  }
-
-  .social-media-button {
-    border-radius: 50px;
-    /* background: linear-gradient(145deg, #e0eaf0, #bcc5ca); */
-    box-shadow:  5px 5px 11px #b2babe, 
-                 -5px -5px 11px #f0fcff;
-    background: rgba(255, 255, 255, 0.2);
-    width: 53px;
-    height: 53px;
-  }
-
-  .buysellbutton {
-      width: 80px;
-      height: 44px;   
-      border-style:none;         
-      border-radius: 16px;
-      background: #F0F0F3;
-      box-shadow:  18px 18px 36px #c5c5c7, 
-               -18px -18px 36px #ffffff;
-      outline:none;
-  }
-
-  .button {
-      width: 44px;
-      height: 44px;
-      background: #f3f0f1;
-      position: relative;
-      background: #f3f0f1;
-      /* margin-bottom: 25px; */
-      border-radius: 16px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.1s ease-in-out;
-      outline: none;
-      border-style: none;
-      box-shadow: -2px -2px 7px rgba(255, 255, 255, 0.8),
-      2px 2px 7px rgba(0, 0, 0, 0.2);
-      font-family: 'Lato', sans-serif;
-      color: #FB7575;
-    }
-    span {
-      font-size: 25px;
-      font-weight: semibold;
-
-    }
-      .button:hover {
-        opacity: 0.7;
-        box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
-          6px 6px 10px rgba(0, 0, 0, 0.2);
-      }
-      .button:active {
-        opacity: 1;
-        box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
-          inset 8px 8px 16px rgba(0, 0, 0, 0.1);
-        color: #79e3b6;
-      }
-  
-
-@keyframes transform
-{
-    0%,
-  100% { border-radius: 33% 67% 70% 30% / 30% 30% 70% 70%; } 
-   20% { border-radius: 37% 63% 51% 49% / 37% 65% 35% 63%; } 
-   40% { border-radius: 36% 64% 64% 36% / 64% 48% 52% 36%; } 
-   60% { border-radius: 37% 63% 51% 49% / 30% 30% 70% 70%; } 
-   80% { border-radius: 40% 60% 42% 58% / 41% 51% 49% 59%; } 
 }
 
+.social-media{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-self: flex-end;
+}
+
+.social-media-button {
+  border-radius: 50px;
+  box-shadow:  5px 5px 11px #b2babe, 
+              -5px -5px 11px #f0fcff;
+  background: rgba(255, 255, 255, 0.2);
+  width: 53px;
+  height: 53px;
+}
+
+.buysellbutton {
+  width: 80px;
+  height: 44px;   
+  border-style:none;         
+  border-radius: 16px;
+  background: #F0F0F3;
+  box-shadow:  18px 18px 36px #c5c5c7, 
+                  -18px -18px 36px #ffffff;
+  outline:none;
+}
+
+.button {
+  width: 44px;
+  height: 44px;
+  background: #f3f0f1;
+  position: relative;
+  background: #f3f0f1;
+  border-radius: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  outline: none;
+  border-style: none;
+  box-shadow: -2px -2px 7px rgba(255, 255, 255, 0.8),
+      2px 2px 7px rgba(0, 0, 0, 0.2);
+  font-family: 'Lato', sans-serif;
+  color: #FB7575;
+}
+    
+span {
+  font-size: 25px;
+  font-weight: semibold;
+}
+      
+.button:hover {
+  opacity: 0.7;
+  box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+              6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+      
+.button:active {
+  opacity: 1;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
+          inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+  color: #79e3b6;
+}
+  
+
+@keyframes transform {
+  0%,
+  100% { border-radius: 33% 67% 70% 30% / 30% 30% 70% 70%; } 
+  20% { border-radius: 37% 63% 51% 49% / 37% 65% 35% 63%; } 
+  40% { border-radius: 36% 64% 64% 36% / 64% 48% 52% 36%; } 
+  60% { border-radius: 37% 63% 51% 49% / 30% 30% 70% 70%; } 
+  80% { border-radius: 40% 60% 42% 58% / 41% 51% 49% 59%; } 
+}
 
 .css-test {
   background: #EAF0F8;
