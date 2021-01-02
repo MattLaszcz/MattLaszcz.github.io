@@ -30,21 +30,21 @@ function stocks() {
 			, stockData: []
 	  },
 
-	  {
-	      name : 'Microsoft'
-	    , symbol : 'MSFT'
-	    , price : '4'
-			, shares : '0'
-			, stockData: []
-	  },
+	//   {
+	//       name : 'Microsoft'
+	//     , symbol : 'MSFT'
+	//     , price : '4'
+	// 		, shares : '0'
+	// 		, stockData: []
+	//   },
 
-	  {
-	      name : 'Facebook'
-	    , symbol : 'FB'
-	    , price : '5'
-			, shares : '0'
-			, stockData: []
-		}
+	//   {
+	//       name : 'Facebook'
+	//     , symbol : 'FB'
+	//     , price : '5'
+	// 		, shares : '0'
+	// 		, stockData: []
+	// 	}
 	];
 
 	//your cash flow

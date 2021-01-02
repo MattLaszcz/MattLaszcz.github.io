@@ -37,15 +37,17 @@ main {
 
 .main-left {
   display: flex;
-  background: #fff;
+  /* background: #fff; */
   width: 75%;
   height: 500px;
-  background: rgba(115 115 115/ 30%);
+  background: rgba(255 241 230 50%);
+
   justify-content: space-between;
   align-items: center;
   border: 0.2px solid #FFFFFF;
   flex-direction: column;
-  background: rgba( 255, 255, 255, 0.40 );
+  /*background: #A8DADC;*/
+  /* background: rgba( 255, 255, 255, 0.40 ); */
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   backdrop-filter: blur( 10.0px );
   -webkit-backdrop-filter: blur( 10.0px );
@@ -68,12 +70,14 @@ li {
 }
 
 .stock-chart {
-  /* border: solid green; */
+  /* border: solid green;  */
   display: flex;
   flex-direction: row;
   height: 90%;
-  background-color: linen;
+  background-color: #EAF0F8;
   border-radius: 10px;
+  box-shadow: 0px 30px 60px rgba(167, 179, 190, 0.35), 0px -30px 60px rgba(248, 252, 255, 0.5);
+  border: 1px solid #F6F6F6;
 }
 
 .shares-price {
@@ -108,7 +112,7 @@ li {
 
 .shares-amount {
   font-family: 'Lato', sans-serif;
-  color: #FB7575;
+  color: #FB7575; /*b36a5e*/
   font-size: 30px;
 }
 
@@ -142,7 +146,9 @@ li {
 body {
 	margin: 0;
   padding: 0;
-  background-color: #FEB5BB;
+  background-color:#FFF1E6;
+  ;
+  ;
 }
 
 .container {
@@ -195,7 +201,8 @@ body {
 .account-data {
   border-radius: 35px;
   padding: 1rem;
-  background: #D99696;
+  background: #A5A58D;
+  ;
   mix-blend-mode: normal;
   box-shadow: inset -2px -2px 1px rgba(0, 0, 0, 0.08), inset 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 35px;
@@ -205,7 +212,8 @@ body {
 .account-cash-flow {
   border-radius: 35px;
   padding: 1rem;
-  background: #E9E096;
+  background: #B7B7A4;
+  ;
   mix-blend-mode: normal;
   box-shadow: inset -2px -2px 1px rgba(0, 0, 0, 0.08), inset 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 35px;
@@ -215,7 +223,7 @@ body {
 .account-cash-info {
   border-radius: 35px;
   padding: 1rem;
-  background: #E9E096;
+  background: #DDBEA9;
   mix-blend-mode: normal;
   box-shadow: inset -2px -2px 1px rgba(0, 0, 0, 0.08), inset 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 35px;
@@ -226,7 +234,8 @@ body {
 .main-right {
   width: 25%;
   height: 500px;
-  background: #D2DEEF;
+  background: #CB997E;
+  ;
   border: 0.2px solid #FFFFFF;
   box-sizing: border-box;
   border-radius: 0px 10px 10px 0px;
