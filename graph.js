@@ -29,7 +29,7 @@ async function getData() {
             }
            
                                 //console.log('symbol='+' '+symbol);
-                                const api_url = 'https://sandbox.iexapis.com/stable/stock/'+ symbol +'/quote?token=YOUR_API_KEY';
+                                const api_url = 'https://sandbox.iexapis.com/stable/stock/'+ symbol +'/quote?token=Tpk_91509c4a718642d892290f720f3feb36';
 
                                 //console.log('API'+'='+api_url);
                                 //const apiKey = process.env.API_KEY replace with api key in the api_url when hiding
@@ -138,7 +138,7 @@ async function getData() {
                 //  };
     };
 
-//setInterval(getData, 2000);
+setInterval(getData, 2000);
 
-getData();
+//getData();
 
